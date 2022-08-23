@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root "index#index"
+  root "questions#index"
   resources :questions
 end
