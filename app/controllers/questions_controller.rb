@@ -1,8 +1,15 @@
 class QuestionsController < ApplicationController
+<<<<<<< HEAD
   before_action :set_question, only: %i[update destroy edit hide show]
   
   def create
     @question = Question.create(question_params)
+=======
+  before_action :set_question, only: %i[update show destroy edit hide]
+  
+  def create
+    Question.create(question_params)
+>>>>>>> 121d3be53df4b0a22d7c6a1ec8faf08368ca7428
 
     redirect_to question_path(@question)
   end
@@ -17,7 +24,11 @@ class QuestionsController < ApplicationController
   end
   
   def hide
+<<<<<<< HEAD
     @question = Question.update!(hidden: true)
+=======
+    @question.update!(hidden: true)
+>>>>>>> 121d3be53df4b0a22d7c6a1ec8faf08368ca7428
 
     redirect_to question_path(@question)
   end
@@ -34,7 +45,11 @@ class QuestionsController < ApplicationController
   end
   
   def update
+<<<<<<< HEAD
     @question.update(question_params)
+=======
+    @question = Question.find(question_params)
+>>>>>>> 121d3be53df4b0a22d7c6a1ec8faf08368ca7428
 
     redirect_to question_path(@question)
   end 
