@@ -6,7 +6,10 @@
  *= require button
  *= require form
  *= require layout
+ *= require message
+ 
+ *= require question
  *= require spacing
  *= require text
-  */
+ */
   
