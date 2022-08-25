@@ -17,6 +17,7 @@
         <div>
           <% if current_user %>
             <%= content_tag 'span', "@#{current_user.nickname}", class: 'mr-sm' %>
+            <%= button_to "Выйти", session_path, method: :delete %>
           <% elsif current_user.present? %>
             <%= content_tag 'span', "@#{current_user.nickname}", class: 'mr-sm' %>
             <%= button_to "Выйти", session_path, method: :delete %>

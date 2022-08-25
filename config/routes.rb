@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/create'
-  get 'sessions/new'
   root to: "questions#index"
 
   resources :questions do
