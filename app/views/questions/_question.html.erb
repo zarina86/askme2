@@ -1,5 +1,5 @@
 <div class="mb-sm">
-  <%= question.body %>
+  <%= simple_format(question.body, {}, sanitize: true) %>
 </div>
 
 <div class="text-sm question-footer">
