@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validates :name, presence: true, format: {with: VALID_NAME_REGEX}, length: {maximum: 40}
   validates :nickname, presence: true, uniqueness: true, length: {maximum: 40}, format: { with: VALID_NICKNAME_REGEX }
   
+  has_many :questions, dependent: :delete_all
+  
   private
 
   def capitalize_name
