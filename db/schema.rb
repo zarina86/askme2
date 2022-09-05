@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_04_080457) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_05_150042) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_080457) do
     t.datetime "updated_at", null: false
     t.boolean "hidden", default: false
     t.text "answer"
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_questions_on_author_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
@@ -32,9 +34,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_04_080457) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "navbar_color"
-    t.string "author"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["nickname"], name: "index_users_on_nickname", unique: true
   end
 
+  add_foreign_key "questions", "users", column: "author_id"
 end

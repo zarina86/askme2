@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates :nickname, presence: true, uniqueness: true, length: {maximum: 40}, format: { with: VALID_NICKNAME_REGEX }
   validates :navbar_color, presence: true, format: { with: VALID_COLOR_REGEX }, on: :update
   has_many :questions, dependent: :delete_all
+  has_many :asked_questions, class_name: "Question", foreign_key: :author_id, dependent: :nullify
   
   private
 

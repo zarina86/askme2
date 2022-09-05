@@ -1,10 +1,14 @@
 <div class="mb-sm">
-  <%= simple_format(question.body, {}, sanitize: true) %>
+  Вопрос задал <%= question_author(question) %>
+</div>
+
+<div class="mb-sm">
+  <%= simple_format(h(question.body)) %>
 </div>
 
 <% if question.answer.present? %>
   <div class="mb-sm text-dark-red">
-    <%= simple_format(question.answer, {}, sanitize: true) %>
+    <%= simple_format(h(question.answer)) %>
   </div>
 <% end %>
 
