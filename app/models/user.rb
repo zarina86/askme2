@@ -19,6 +19,9 @@ class User < ApplicationRecord
   has_many :questions, dependent: :delete_all
   has_many :asked_questions, class_name: "Question", foreign_key: :author_id, dependent: :nullify
   
+  include Gravtastic
+  gravtastic(secure: true, file_type: :png, size: 100, default: "retro")
+  
   private
 
   def capitalize_name
