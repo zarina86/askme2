@@ -2,13 +2,7 @@
   Вопрос задал <%= question_author(question) %>
 </div>
 
-<% if question.hidden? %>
-  <% text_format = 'text-hidden' %>
-<% else %>
-  <% text_format = 'text-grey' %>
-<% end %>
-
-<div class="mb-sm text_format">
+<div class="mb-sm <%= question.hidden? ? 'text-hidden' : '' %>">
   <%= simple_format(h(question.body)) %>
 </div>
 
