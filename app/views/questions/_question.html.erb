@@ -2,12 +2,18 @@
   Вопрос задал <%= question_author(question) %>
 </div>
 
-<div class="mb-sm <%= question.hidden? ? "text-hidden" : "text-grey" %>">
+<% if question.hidden? %>
+  <% text_format = 'text-hidden' %>
+<% else %>
+  <% text_format = 'text-grey' %>
+<% end %>
+
+<div class="mb-sm text_format">
   <%= simple_format(h(question.body)) %>
 </div>
 
 <% if question.answer.present? %>
-  <div class="mb-sm <%= question.hidden? ? "text-hidden" : "text-dark-red" %>"> 
+  <div class="mb-sm text-dark-red"> 
     <%= simple_format(h(question.answer)) %>
   </div>
 <% end %>
@@ -24,16 +30,10 @@
       <%= link_to fa_icon(edit_icon), edit_question_path(question),
        title: "Изменить вопрос", class: "mr-sm" %>
       
-      <% hide_icon = (question.hidden? ? "" : "eye-slash") %>
+       <% hide_icon = (question.hidden? ? "" : "eye-slash") %>
 
-      <%= button_to fa_icon(hide_icon), hide_question_path(question),
-       method: :patch, title: "Скрыть вопрос", class: "mr-sm" %>
-
-      <% unless question.hidden? %>
-        <%= button_to fa_icon("eye-slash"),
-          hide_question_path(question),
-          method: :patch, title: "Скрыть вопрос" %>
-      <% end %>
+       <%= button_to fa_icon(hide_icon), hide_question_path(question),
+        method: :patch, title: "Скрыть вопрос" %>
 
       <%= button_to fa_icon("trash-o"), question_path(question), method: :delete,
        title: "Удалить вопрос", form: {data: {turbo_confirm: "Точно удалить?" }} %>

@@ -28,16 +28,9 @@ class QuestionsController < ApplicationController
   end
   
   def hide
-    @user = User.find_by!(nickname: params[:user_nickname])
-    @user = @question.user
-        
-    if @question.update!(hidden: true)
-      redirect_to user_path(@question_user), notice: "Вопрос скрыт!"
-    else
-      flash.now[:alert] = "При попытке скрыть вопрос возникли ошибки!"
+    @question.update!(hidden: true)
 
-      redirect_to user_path(@question_user), notice: "Вопрос скрыть не удалось!"
-    end
+    redirect_to questions_path, notice: "Вопрос скрыт" 
   end
 
   def index
