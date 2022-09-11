@@ -21,6 +21,10 @@ class User < ApplicationRecord
   
   include Gravtastic
   gravtastic(secure: true, file_type: :png, size: 100, default: "retro")
+
+  def to_param
+    nickname
+  end
   
   private
 

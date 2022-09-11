@@ -2,12 +2,12 @@
   Вопрос задал <%= question_author(question) %>
 </div>
 
-<div class="mb-sm">
+<div class="mb-sm <%= question.hidden? ? "text-hidden" : "text-grey" %>">
   <%= simple_format(h(question.body)) %>
 </div>
 
 <% if question.answer.present? %>
-  <div class="mb-sm text-dark-red">
+  <div class="mb-sm <%= question.hidden? ? "text-hidden" : "text-dark-red" %>"> 
     <%= simple_format(h(question.answer)) %>
   </div>
 <% end %>
@@ -23,8 +23,13 @@
 
       <%= link_to fa_icon(edit_icon), edit_question_path(question),
        title: "Изменить вопрос", class: "mr-sm" %>
-  
-      <% unless @question.hidden? %>
+      
+      <% hide_icon = (question.hidden? ? "" : "eye-slash") %>
+
+      <%= button_to fa_icon(hide_icon), hide_question_path(question),
+       method: :patch, title: "Скрыть вопрос", class: "mr-sm" %>
+
+      <% unless question.hidden? %>
         <%= button_to fa_icon("eye-slash"),
           hide_question_path(question),
           method: :patch, title: "Скрыть вопрос" %>
