@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :ensure_current_user, only: %i[update destroy edit hide]
-   before_action :set_question_for_current_user, only: %i[update destroy edit hide]
+  before_action :set_question_for_current_user, only: %i[update destroy edit hide]
   
   def create
     question_params = params.require(:question).permit(:body, :user_id)
@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
     @question.author = current_user
           
     if @question.save
-      redirect_to user_path(@question.user), notice: "Новый вопрос создан!"
+      redirect_to user_path(@question.user.nickname), notice: "Новый вопрос создан!"
     else
       flash.now[:alert] = "Вы неправильно заполнили поля формы вопроса!"
 
@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
     @user = @question.user
     @question.destroy
 
-    redirect_to user_path(@user), notice: "Вопрос удален!"
+    redirect_to user_path(@user.nickname), notice: "Вопрос удален!"
   end
 
   def edit
@@ -39,12 +39,13 @@ class QuestionsController < ApplicationController
   end
   
   def new
-    @user = User.find_by!(nickname: params[:user_nickname])
+    @user = User.find(params[:user_id])
     @question = Question.new(user: @user)
   end
 
   def show
     @question = Question.find(params[:id])
+    @user = User.find(params[:user_id])
     @user = @question.user
   end
   
@@ -52,7 +53,7 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :answer)
 
     if @question.update(question_params)
-      redirect_to user_path(@question.user), notice: "Вопрос сохранен!"
+      redirect_to user_path(@question.user.nickname), notice: "Вопрос сохранен!"
     else
       flash.now[:alert] = "При попытке сохранить вопрос возникли ошибки!"
 

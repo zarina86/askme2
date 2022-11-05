@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by!(nickname: params[:nickname])
+    @user = User.find_by!(nickname: params[:nickname].downcase)
   end
 
   def update_user_params

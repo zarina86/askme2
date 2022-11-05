@@ -8,7 +8,9 @@ class Question < ApplicationRecord
   belongs_to :user
   belongs_to :author, class_name: "User"
   
- 
+  has_many :hashtag_questions, dependent: :destroy
+  has_many :hashtags, through: :hashtaq_questions 
+  
   def hidden?
     hidden
   end
