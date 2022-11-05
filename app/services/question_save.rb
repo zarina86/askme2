@@ -1,4 +1,4 @@
-Class QuestionSave
+class QuestionSave
   def.self.call()
     new
   end
