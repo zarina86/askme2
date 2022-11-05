@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class="title-lg mb-sm">Новый вопрос</h2>
   <% if @user.present? %>
-    <p class="mb">для <%= link_to "@#{@user.nickname}", user_path(@user) %></p>
+    <p class="mb">для <%= link_to "@#{@user.nickname}", user_path(@user.nickname) %></p>
   <% end %>
 
   <%= render 'form', question: @question %>
